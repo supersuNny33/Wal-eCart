@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Churn Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #333;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        select {
+            height: 35px;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Churn Prediction</h1>
+    <form action="/predict" method="POST">
+        <label for="Age">Age:</label>
+        <input type="number" name="Age" required><br>
+        <label for="TotalSpending">Total Spending:</label>
+        <input type="number" step="0.01" name="TotalSpending" required><br>
+        <label for="RecencyOfPurchase">Recency of Purchase (days):</label>
+        <input type="number" name="RecencyOfPurchase" required><br>
+        <label for="NumItemsPerOrder">Number of Items Per Order:</label>
+        <input type="number" name="NumItemsPerOrder" required><br>
+        <label for="AvgProductPrice">Average Product Price:</label>
+        <input type="number" step="0.01" name="AvgProductPrice" required><br>
+        <label for="TimeOnWebsite">Time on Website (minutes):</label>
+        <input type="number" step="0.01" name="TimeOnWebsite" required><br>
+        <label for="NumAbandonedCarts">Number of Abandoned Carts:</label>
+        <input type="number" name="NumAbandonedCarts" required><br>
+        <label for="NumCustomerServiceCalls">Number of Customer Service Calls:</label>
+        <input type="number" name="NumCustomerServiceCalls" required><br>
+        <label for="AvgRating">Average Rating:</label>
+        <input type="number" step="0.1" name="AvgRating" required><br>
+        <label for="Gender">Gender:</label>
+        <select name="Gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
+        <label for="SentimentOfReviews">Sentiment of Reviews:</label>
+        <select name="SentimentOfReviews" required>
+            <option value="Neutral">Neutral</option>
+            <option value="Positive">Positive</option>
+        </select><br>
+        <label for="ParticipatedInCampaign">Participated in Campaign:</label>
+        <select name="ParticipatedInCampaign" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+        <input type="submit" value="Predict">
+    </form>
+    <br>
+    {% if churn_result %}
+    <p>{{ churn_result }}</p>
+    {% endif %}
+</body>
+</html>

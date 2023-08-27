@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the table header and footer */
+        th {
+            font-size: 24px;
+            padding: 15px;
+        }
+
+        tfoot th {
+            font-size: 24px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 36px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        input[type="text"] {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px 0 0 8px;
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            padding: 15px 30px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Style for the Search button */
+        .search-button {
+            padding: 15px 30px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }        
+
+        #products {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .product {
+            border: 2px solid #ccc;
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .product p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .product a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .product a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style the Go to Shopping List button */
+        .go-to-list-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .prediction-button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        /* Style the "Add to List" button */
+        .add-to-list-button {
+            display: inline-block;
+            padding: 8px 12px; /* Adjusted padding */
+            font-size: 14px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-sizing: border-box; /* Ensure padding is included in the width */
+        }
+
+
+        /* Styles for the card container */
+       .card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Styles for individual product cards */
+        .product-card {
+            padding: 20px;
+            border: 2px solid #ccc;
+            background-color: white;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <form action="/walmart_map" method="GET" class="go-to-list-button">
+        <button type="submit">View Walmart Map</button>
+    </form> 
+
+    <h1>Product Catalog</h1>
+
+    <!-- Search Form -->
+    <form action="/search" method="POST">
+        <input type="text" name="keyword" placeholder="Search by product name">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Product Cards -->
+    <div id="products">
+        {% if products %}
+        <h2>Search Results{% if keyword %} for "{{ keyword }}"{% endif %}</h2>
+        <div class="card-container">
+            {% for product in products %}
+            <div class="product-card">
+                <h3><a href="{{ product.Product_Url }}" target="_blank">{{ product.Product_Name }}</a></h3>
+                <p>Brand: {{ product.Brand }}</p>
+                <p>Sale Price: ${{ product.Sale_Price }}</p>
+                <p>Category: {{ product.Category }}</p>
+                <p>Quantity: {{ product.Quantity }}</p>
+
+                <!-- Add to List form -->
+                <form action="/add_to_list" method="POST">
+                    <input type="hidden" name="product_id" value="{{ product._id }}">
+                    <button class="add-to-list-button" type="submit">Add to List</button>
+                </form>
+
+            </div>
+            {% if loop.index % 3 == 0 %}
+            </div><div class="card-container">
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+
+    <!-- Go to Shopping List button -->
+    <form action="/shopping_list" method="GET" class="go-to-list-button">
+        <button type="submit">Go to Shopping List</button>
+    </form> 
+
+    <div class="button-container">
+        <a href="/predict" class="prediction-button">Predict Customer Churn</a>
+    </div>
+
+
+  <div class="product-lookup">
+
+        <h1>Product Lookup</h1>
+
+        <form id="barcode-form" method="POST">
+            <label class="barcode-label">Check Your Product:</label>
+            <input type="text" name="barcode" id="barcode-input" placeholder="Enter barcode">
+            <input type="submit" value="Search">
+        </form>
+
+        <p id="error-message" style="color: red;"></p>
+
+        <div id="product-details">
+            
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#barcode-form').submit(function (event) {
+                    event.preventDefault(); // Prevent the form from submitting normally
+
+                    var enteredBarcode = $('#barcode-input').val();
+
+                    $.post('/barcode', { barcode: enteredBarcode }, function (data) {
+                        if (data.product) {
+                            $('#error-message').empty(); // Clear any previous error messages
+                            $('#product-details').html(data.product);
+                        } else {
+                            $('#product-details').empty(); // Clear product details
+                            $('#error-message').text('Product not found');
+                        }
+                    });
+                });
+            });
+        </script>
+
+    </div> 
+    
+
+
+</body>
+
+</html>

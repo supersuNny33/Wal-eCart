@@ -1,0 +1,120 @@
+/* Reset and General Styles */
+body, h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #666666;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+}
+
+p {
+    color: #858585;
+    margin: 0 0 1em !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+}
+
+a {
+    color: #005f8d;
+    text-decoration: none;
+    text-shadow: none;
+    transition: all 0.2s linear;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Header */
+h1 {
+    font-size: 36px;
+    color: #005f8d;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Recommended Products Section */
+#recommended-products {
+    text-align: center;
+    padding: 40px 0;
+}
+
+#recommended-products h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #005f8d;
+    font-weight: bold;
+}
+
+#recommended-products ul {
+    list-style: none;
+    padding: 0;
+}
+
+#recommended-products li {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+#recommended-products li:hover {
+    transform: scale(1.05);
+}
+
+#recommended-products h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #005f8d;
+}
+
+#recommended-products p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Product Links */
+#recommended-products a {
+    color: #005f8d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#recommended-products a:hover {
+    color: #145AC4;
+}
+.add-to-list-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 14px;
+    background-color: #009688;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-to-list-btn:hover {
+    background-color: #00796b;
+}

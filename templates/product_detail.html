@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 36px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px auto;
+            width: 80%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        /* Add even/odd background color */
+        li:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        /* Style the product details */
+        h2 {
+            margin: 0;
+            font-size: 24px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        /* Add spacing between the title and the details */
+        ul {
+            margin-top: 20px;
+        }
+
+        /* Create 3-column layout for nutritional info */
+        .nutritional-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .nutritional-info li {
+            width: 30%;
+            /* Each column takes about 30% width */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product Details</h1>
+    <ul>
+        <h2>Product Information</h2>
+        <li><strong>Object ID:</strong> {{ product.objectid }}</li>
+        <li><strong>Name:</strong> {{ product.name }}</li>
+        <li><strong>Brand:</strong> {{ product.brand }}</li>
+        <li><strong>Categories:</strong> {{ product.categories }}</li>
+        <li><strong>Date Added:</strong> {{ product.dateAdded }}</li>
+        <li><strong>Date Updated:</strong> {{ product.dateUpdated }}</li>
+        <li><strong>Manufacturer:</strong> {{ product.manufacturer }}</li>
+        <li><strong>Ingredients:</strong> {{ product.ingredients }}</li>
+        <h2>Nutritional Information</h2>
+        <div class="nutritional-info">
+            <li><strong>Energy (kcal):</strong> {{ product.Energy_kcal }}</li>
+            <li><strong>Protein (g):</strong> {{ product.Protein_g }}</li>
+            <li><strong>Saturated Fats (g):</strong> {{ product.Saturated_fats_g }}</li>
+            <li><strong>Fat (g):</strong> {{ product.Fat_g }}</li>
+            <li><strong>Carbohydrates (g):</strong> {{ product.Carb_g }}</li>
+            <li><strong>Fiber (g):</strong> {{ product.Fiber_g }}</li>
+            <li><strong>Sugar (g):</strong> {{ product.Sugar_g }}</li>
+            <li><strong>Calcium (mg):</strong> {{ product.Calcium_mg }}</li>
+            <li><strong>Iron (mg):</strong> {{ product.Iron_mg }}</li>
+            <li><strong>Magnesium (mg):</strong> {{ product.Magnesium_mg }}</li>
+            <li><strong>Phosphorus (mg):</strong> {{ product.Phosphorus_mg }}</li>
+            <li><strong>Potassium (mg):</strong> {{ product.Potassium_mg }}</li>
+            <li><strong>Sodium (mg):</strong> {{ product.Sodium_mg }}</li>
+            <li><strong>Zinc (mg):</strong> {{ product.Zinc_mg }}</li>
+            <li><strong>Copper (mcg):</strong> {{ product.Copper_mcg }}</li>
+            <li><strong>Manganese (mg):</strong> {{ product.Manganese_mg }}</li>
+            <li><strong>Selenium (mcg):</strong> {{ product.Selenium_mcg }}</li>
+            <li><strong>Vitamin C (mg):</strong> {{ product.VitC_mg }}</li>
+            <li><strong>Thiamin (mg):</strong> {{ product.Thiamin_mg }}</li>
+            <li><strong>Riboflavin (mg):</strong> {{ product.Riboflavin_mg }}</li>
+            <li><strong>Niacin (mg):</strong> {{ product.Niacin_mg }}</li>
+            <li><strong>Vitamin B6 (mg):</strong> {{ product.VitB6_mg }}</li>
+            <li><strong>Folate (mcg):</strong> {{ product.Folate_mcg }}</li>
+            <li><strong>Vitamin B12 (mcg):</strong> {{ product.VitB12_mcg }}</li>
+            <li><strong>Vitamin A (mcg):</strong> {{ product.VitA_mcg }}</li>
+            <li><strong>Vitamin E (mg):</strong> {{ product.VitE_mg }}</li>
+            <li><strong>Vitamin D2 (mcg):</strong> {{ product.VitD2_mcg }}</li>
+        </div>
+    </ul>
+</body>
+
+</html>

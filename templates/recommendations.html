@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <title>Recommended Products</title>
+
+    <style>
+
+        /* Reset and General Styles */
+        body, h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #666666;
+            background: #fff;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+            transition: all 0.3s linear;
+            -webkit-transition: all 0.3s linear;
+            -moz-transition: all 0.3s linear;
+            -o-transition: all 0.3s linear;
+        }
+
+        p {
+            color: #858585;
+            margin: 0 0 1em !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        a {
+            color: #005f8d;
+            text-decoration: none;
+            text-shadow: none;
+            transition: all 0.2s linear;
+        }
+
+        a:hover {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 36px;
+            color: #005f8d;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Recommended Products Section */
+        #recommended-products {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        #recommended-products h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #005f8d;
+            font-weight: bold;
+        }
+
+        #recommended-products ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #recommended-products li {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #recommended-products li:hover {
+            transform: scale(1.05);
+        }
+
+        #recommended-products h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #005f8d;
+        }
+
+        #recommended-products p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        /* Product Links */
+        #recommended-products a {
+            color: #005f8d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #recommended-products a:hover {
+            color: #145AC4;
+        }
+        .add-to-list-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 14px;
+            background-color: #009688;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-list-btn:hover {
+            background-color: #00796b;
+        }
+        
+
+
+
+        /* Styles for the card container */
+        .card-container2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Styles for individual product cards */
+        .product-card2 {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+            margin-bottom: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card2:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card2 h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #005f8d;
+        }
+
+        .product-card2 p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .product-card2-content {
+            flex: 1;
+        }
+
+        .add-to-list-btn {
+            margin-top: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 68%; 
+
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 14px;
+            background-color: #009688;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-list-btn:hover {
+            background-color: #00796b;
+        }
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+    <div id="recommended-products">
+        <h1>Recommended Products</h1>
+        <div class="card-container2">
+            {% if recommended_products %}
+            {% for product in recommended_products %}
+            <div class="product-card2">
+                <div class="product-card-content">
+                    <h3><a href="{{ product.Product_Url }}" target="_blank">{{ product.Product_Name }}</a></h3>
+                    <p class="brand">Brand: {{ product.Brand }}</p>
+                    <p class="sale-price">Sale Price: ${{ product.Sale_Price }}</p>
+                </div>
+                <button class="add-to-list-btn" data-product-id="{{ product._id }}">Add to List</button>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="no-recommendations">No recommendations available at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+    // Add event listener to "Add to List" buttons
+    const addToListButtons = document.querySelectorAll('.add-to-list-btn');
+    addToListButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = button.getAttribute('data-product-id');
+            addToShoppingList(productId);
+        });
+    });
+
+    // Function to add product to shopping list
+    function addToShoppingList(productId) {
+        // Send an AJAX request to your server to add the product to the shopping list
+        // You can use libraries like jQuery or fetch API for this
+        // Example using fetch API:
+        fetch(`/add_to_list`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ product_id: productId }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success or failure
+                if (data.success) {
+                    // Product added successfully, you can provide feedback to the user
+                } else {
+                    // Product couldn't be added, show an error message
+                }
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
+            });
+    }
+</script>
+
+
+</html>

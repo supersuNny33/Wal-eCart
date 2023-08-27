@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Product Catalog + Recommendation -->
+
+<head>
+
+    <title>Product Catalog</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+        :root {
+        --black: #1f1f1f;
+        --white: #fff;
+        --yellow: #ffb91d;
+
+        --deep-yellow: #ffc727;
+        --bg-yellow: #fffaf1;
+        --btn-yellow: #fff4d4;
+        --footer-yellow: #fff9e9;
+        --grey: #737373;
+        --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+        --transition: all 0.2s linear;
+        }
+
+        *,
+        *::after,
+        *::before {
+        box-sizing: inherit;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: var(--black);
+        }
+
+        a {
+        text-decoration: none;
+        color: inherit;
+        }
+
+        li {
+        list-style: none;
+        }
+
+        img {
+        height: 100%;
+        }
+
+        section {
+        padding: 2rem 9%;
+        }
+
+         /* Header */
+        .header {
+
+          top: 0;
+          left: 0;
+          right: 0;
+          padding: 1rem 7%;
+          height: 8rem;
+          background: #0172cf;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: var(--box-shadow);
+          z-index: 1000;
+       
+        }
+
+        .logo {
+          font-size: 3.6rem;
+          font-weight: 700;
+
+          color: var(--white);
+        }
+
+        .navbar a {
+          font-weight: 500;
+          transition: var(--transition);
+          padding: 1rem;
+          border-bottom: 2px solid transparent;
+
+          color: white;
+        }
+
+        .navbar a:not(:last-child) {
+          margin-right: 1rem;
+        }
+
+        .navbar a:hover {
+          color: var(--yellow);
+          border-color: var(--yellow);
+        }
+
+        .btn {
+          font-size: 2rem;
+          display: inline-block;
+          color: white;
+          background-color: #ffb91d;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          transition: var(--transition);
+        }
+
+        .btn:hover {
+          box-shadow: var(--box-shadow);
+        }
+
+
+        .header .hamburger img {
+          width: 3rem;
+
+        }
+
+        .header .hamburger {
+          display: none;
+
+        }
+
+
+        @media (max-width: 996px) {
+          .logo {
+            font-size: 3rem;
+          }
+
+          .navbar a {
+            padding: 0.5rem;
+          }
+
+          .navbar a:not(:last-child) {
+            margin-right: 0.5rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .header .navbar {
+            position: fixed;
+            /* top: 9rem; */
+            left: 0;
+            right: 0;
+            width: 90%;
+            padding: 2.5rem;
+            margin: 0 auto;
+            box-shadow: var(--box-shadow);
+            background-color: var(--white);
+            text-align: center;
+            border-radius: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: 0.4s;
+            top: -100%;
+          }
+
+
+          .header .hamburger {
+            display: block;
+          }
+
+          .navbar.show {
+            top: 9rem;
+            background-color: #0172cf; 
+            height: 15rem;
+          }
+
+        }
+
+        /* Footer */
+
+        .footer {
+          color: #fff;
+        }
+
+        .footer .top {
+          background-color: #0172cf;
+          padding: 6rem 9%;
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+        }
+
+        .footer .top .links {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 3rem;
+        }
+
+        .footer .bottom {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1.5rem 0;
+          background-color: #0172cf; /* Change the background color here */
+        }
+
+        .footer .top .content p {
+          color: #fff;
+          margin-top: 2rem;
+          width: 90%;
+        }
+
+        .footer .top .link h4 {
+          font-size: 1.7rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .footer .top .link a {
+          display: inline-block;
+          color: #fff; /* Change the link color to white */
+          margin-bottom: 1rem;
+        }
+
+        .footer .top .link span {
+          color: #fff; /* Change the span color to white */
+        }
+
+        .footer .top .link a {
+          display: block;
+        }
+
+        .footer .top .link div {
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+        }
+
+        .footer .top .link div img {
+          margin-right: 1rem;
+        }
+
+        @media (max-width: 996px) {
+          .footer .top {
+            padding: 5rem 9%;
+            grid-template-columns: 1fr;
+          }
+
+          .footer .top .content {
+            display: none;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .footer .top .links {
+            grid-template-columns: 1fr;
+            gap: 3rem 0;
+          }
+
+          .footer .top .link {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .footer .bottom {
+            padding: 1.5rem;
+          }
+        }        
+
+
+        /* Product Catalog. */
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 36px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        input[type="text"] {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px 0 0 8px;
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            padding: 15px 30px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+
+        #products {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .product {
+            border: 2px solid #ccc;
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .product p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .product a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .product a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style the Go to Shopping List button */
+        .go-to-list-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Style the "Add to List" button */
+        .add-to-list-button {
+            display: inline-block;
+            padding: 8px 12px; /* Adjusted padding */
+            font-size: 14px;
+            background-color: #009688;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-sizing: border-box; /* Ensure padding is included in the width */
+        }
+
+        .add-to-list-button:hover {
+            background-color: #00796b;
+        }
+
+        /* Styles for the card container */
+       .card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Styles for individual product cards */
+        .product-card {
+            padding: 20px;
+            border: 2px solid #ccc;
+            background-color: white;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+
+        /* Recommended Css */
+        /* Header */
+        h1 {
+            font-size: 36px;
+            color: #005f8d;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Recommended Products Section */
+        #recommended-products {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        #recommended-products h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #005f8d;
+            font-weight: bold;
+        }
+
+        #recommended-products ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #recommended-products li {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #recommended-products li:hover {
+            transform: scale(1.05);
+        }
+
+        #recommended-products h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #005f8d;
+        }
+
+        #recommended-products p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        /* Product Links */
+        #recommended-products a {
+            color: #005f8d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #recommended-products a:hover {
+            color: #145AC4;
+        }
+        .add-to-list-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 14px;
+            background-color: #009688;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-list-btn:hover {
+            background-color: #00796b;
+        }
+        
+        /* Styles for the card container */
+        .card-container2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Styles for individual product cards */
+        .product-card2 {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+            margin-bottom: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card2:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card2 h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #005f8d;
+        }
+
+        .product-card2 p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .product-card2-content {
+            flex: 1;
+        }
+
+        .add-to-list-btn {
+            margin-top: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 68%; 
+
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 14px;
+            background-color: #009688;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-list-btn:hover {
+            background-color: #00796b;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <!-- Navbar -->
+    <header class="header">
+
+        <a href="/" class="logo">Walmart</a>
+  
+  
+        <nav class="navbar">
+  
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          
+        </nav>
+  
+        <!-- Hamburger -->
+        <div class="hamburger">
+          <img src="myimages/grid-outline.svg" alt="" />
+        </div>
+  
+    </header>    
+    
+
+    <h1>Product Catalog</h1>
+
+    <!-- Search Form -->
+    <form action="/search" method="POST">
+        <input type="text" name="keyword" placeholder="Search by product name">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Product Cards -->
+    <div id="products">
+
+        {% if products %}
+        <h2>Search Results{% if keyword %} for "{{ keyword }}"{% endif %}</h2>
+        <div class="card-container">
+            {% for product in products %}
+            <div class="product-card">
+                <h3><a href="{{ product.Product_Url }}" target="_blank">{{ product.Product_Name }}</a></h3>
+                <p>Brand: {{ product.Brand }}</p>
+                <p>Sale Price: ${{ product.Sale_Price }}</p>
+                <p>Category: {{ product.Category }}</p>
+                <p>Quantity: {{ product.Quantity }}</p>
+
+                <!-- Add to List form -->
+                <form action="/add_to_list" method="POST">
+                    <input type="hidden" name="product_id" value="{{ product._id }}">
+                    <button class="add-to-list-button" type="submit">Add to List</button>
+                </form>
+
+            </div>
+            {% if loop.index % 3 == 0 %}
+            </div><div class="card-container">
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+    </div>
+
+
+
+    <!-- Recommendation HTMl -->
+    <div id="recommended-products">
+        <h1>Recommended Products</h1>
+        <div class="card-container2">
+            {% if recommended_products %}
+            {% for product in recommended_products %}
+            <div class="product-card2">
+                <div class="product-card-content">
+                    <h3><a href="{{ product.Product_Url }}" target="_blank">{{ product.Product_Name }}</a></h3>
+                    <p class="brand">Brand: {{ product.Brand }}</p>
+                    <p class="sale-price">Sale Price: ${{ product.Sale_Price }}</p>
+                </div>
+                <button class="add-to-list-btn" data-product-id="{{ product._id }}">Add to List</button>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="no-recommendations">No recommendations available at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+      <div class="top">
+
+        <div class="content">
+
+          <a href="" class="logo">Walmart</a>
+          <p>
+            Serving customers worldwide with quality products and exceptional value.
+            Explore our wide range of offerings for all your shopping needs.
+          </p>
+
+        </div>
+
+        <div class="links">
+          <div class="link">
+            <h4>Contact Information</h4>
+            <div>
+              <img src="./images/location-cross.svg" alt="" />
+              <span>122,Albert St, Port Melbourne,Vic 3207.</span>
+            </div>
+            <div>
+              <img src="./images/sms-tracking.svg" alt="" />
+              <span>Walmart@gmail.com</span>
+            </div>
+          </div>
+
+          <div class="link">
+            <h4>Quick Links</h4>
+            <a href="#">Services</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Download</a>
+          </div>
+
+          <div class="link">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term of Use</a>
+            <a href="#">Conditions</a>
+            <a href="#">Location</a>
+          </div>
+
+          <div class="link">
+            <h4>Connect with Us</h4>
+            <div>
+              <img src="./images/instagram.svg" alt="" />
+              <span>Instagram</span>
+            </div>
+            <div>
+              <img src="./images/twitter.svg" alt="" />
+              <span>Twitter</span>
+            </div>
+            <div>
+              <img src="./images/facebook.svg" alt="" />
+              <span>Facebook</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="bottom">
+        <p>Copyright © 2023 Walmart Company Los Angeles. All rights reserved.</p>
+      </div>
+
+    </footer>
+
+
+
+</body>
+
+
+
+<script>
+
+    // Add event listener to "Add to List" buttons
+    const addToListButtons = document.querySelectorAll('.add-to-list-btn');
+    addToListButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = button.getAttribute('data-product-id');
+            addToShoppingList(productId);
+        });
+    });
+
+    // Function to add product to shopping list
+    function addToShoppingList(productId) {
+        // Send an AJAX request to your server to add the product to the shopping list
+        // You can use libraries like jQuery or fetch API for this
+        // Example using fetch API:
+        fetch(`/add_to_list`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ product_id: productId }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success or failure
+                if (data.success) {
+                    // Product added successfully, you can provide feedback to the user
+                } else {
+                    // Product couldn't be added, show an error message
+                }
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
+            });
+    }
+
+</script>
+
+</html>
